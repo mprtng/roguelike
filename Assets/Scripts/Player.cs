@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
 
     public float speed;
+    public int health;
 
     private Rigidbody2D _rigidBody;
     private Vector2 _moveInput;
@@ -14,6 +15,7 @@ public class NewBehaviourScript : MonoBehaviour
     private Animator _animator;
 
     private bool _facingRight = true;
+    private bool _isDamaged = false;
 
     void Start()
     {
@@ -44,6 +46,10 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Flip();
         }
+        if(_isDamaged)
+        {
+            _isDamaged = false;
+        }
     }
 
     void FixedUpdate() 
@@ -58,5 +64,11 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    private void TakeDamage(float damage)
+    {
+        health -= damage;
+        _isDamaged = true;
     }
 }
